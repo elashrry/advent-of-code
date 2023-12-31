@@ -18,7 +18,7 @@ def predict(history_list, direction="forward"):
     return predict_value
 
 # part 1 & 2
-with open("input.txt", "r") as f:
+with open("../AoC-input/2023/day9.txt", "r") as f:
     total_forward = 0
     total_backward = 0
     for line in f:
@@ -30,4 +30,4 @@ with open("input.txt", "r") as f:
         total_backward += value_backward
 
     print("The sum of extrapolated values (forward)", total_forward)
-    print("The sum of extrapolated values (forward)", total_backward)
+    print("The sum of extrapolated values (backward)", total_backward)

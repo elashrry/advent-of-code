@@ -2,7 +2,7 @@ import re
 
 # part 1
 part1_regex = re.compile(r"\d")
-with open("./input.txt", "r") as f:
+with open("../AoC-input/2023/day1.txt", "r") as f:
     total = 0
     for line in f:
         search_list = re.findall(part1_regex, line)
@@ -16,7 +16,7 @@ alphabet_digits = {
     "six": 6, "seven": 7, "eight": 8, "nine": 9,
     }
 part2_regex = re.compile(r"(?=(" + "|".join(alphabet_digits.keys()) + r"|\d))")
-with open("./input.txt", "r") as f:
+with open("../AoC-input/2023/day1.txt", "r") as f:
     total = 0
     for line in f:
         search_list = re.findall(part2_regex, line)

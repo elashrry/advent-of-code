@@ -61,7 +61,7 @@ def get_n_step(
     return step
 
 def main():
-    instruction_seq, node_dict = parse_input("input.txt")
+    instruction_seq, node_dict = parse_input("../AoC-input/2023/day8.txt")
     # part 1
     node = "AAA"
     n_step = get_n_step(node, instruction_seq, node_dict, lambda node: node=="ZZZ")

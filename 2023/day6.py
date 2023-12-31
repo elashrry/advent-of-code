@@ -1,6 +1,6 @@
 from math import floor, ceil, sqrt
 
-with open("input.txt") as f:
+with open("../AoC-input/2023/day6.txt") as f:
     time_line = f.readline().split(": ")[1].strip()
     time_list = list(map(int, time_line.split()))
     record_line = f.readline().split(": ")[1].strip()

@@ -22,7 +22,7 @@ def parse_input(line: str):
 
     return card_id, winning_set, elf_set
 
-with open("input.txt", "r") as f:
+with open("../AoC-input/2023/day4.txt", "r") as f:
     # part 1 & 2
     total_points = 0
     new_pile_dict = {1: 1}  # count of each card

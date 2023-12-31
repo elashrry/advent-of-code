@@ -17,7 +17,7 @@ def is_possible_game(
     return (max_possible_red <= max_red) and (
         max_possible_green <= max_green) and (max_possible_blue <= max_blue)
 
-with open("./input.txt", "r") as f:
+with open("../AoC-input/2023/day2.txt", "r") as f:
     power_sum = 0
     game_id_sum = 0
     for line in f:

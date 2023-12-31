@@ -59,7 +59,7 @@ def find_gear_ratio(s_idx: int, lines_str: str, line_width: int):
         return adjacent_parts[0] * adjacent_parts[1]
     return 0
 
-with open("input.txt", "r") as f:
+with open("../AoC-input/2023/day3.txt", "r") as f:
     line_width = len(f.readline())
     f.seek(0)
     lines_str = "".join(f.readlines())

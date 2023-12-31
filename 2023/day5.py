@@ -1,11 +1,11 @@
 # part 2: lower than 13756552
 import time
 
-from utils import Interval, Subset, Mapper, get_last_output
+from utils.day5 import Interval, Subset, Mapper, get_last_output
 
 start_time = time.time()
 
-with open("input.txt", "r") as f:
+with open("../AoC-input/2023/day5.txt", "r") as f:
 # with open("input_ex.txt", "r") as f:
 # with open("input_ex2.txt", "r") as f:
     seed_pair_list = list(map(int, f.readline().split(": ")[1].strip().split()))

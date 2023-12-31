@@ -28,7 +28,7 @@ def calculate_hand_rank(hand: str, j_joker=False):
     if len(card_count)==5:  # high card
         return 1
 
-with open("input.txt", "r") as f:
+with open("../AoC-input/2023/day7.txt", "r") as f:
     bid_list = []
     hand_part1_list = []
     hand_part2_list = []
