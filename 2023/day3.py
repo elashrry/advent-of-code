@@ -1,6 +1,8 @@
 from typing import List
 import re
 
+from utils import Parser
+
 # part 1
 def is_part_number(
         d_start: int, d_end: int, symbol_idx_list: List[int], line_width: int):
@@ -59,15 +61,15 @@ def find_gear_ratio(s_idx: int, lines_str: str, line_width: int):
         return adjacent_parts[0] * adjacent_parts[1]
     return 0
 
-with open("../AoC-input/2023/day3.txt", "r") as f:
-    line_width = len(f.readline())
-    f.seek(0)
-    lines_str = "".join(f.readlines())
+def main():
+    parser = Parser("../AoC-input/2023/day3.txt")
+    lines = parser.get_lines()
+    line_width = len(lines[0])
+    lines_str = "".join(lines)  # ! if I use parser.data here, I got different results ! 
     # extract indices of all digits
     digit_iter = re.finditer(r"\d+", lines_str)
     # extract indices of all symbols (non-digit and non-period)
-    symbol_idx_list = [
-        m.start() for m in re.finditer(r"(?!(\d|\.|\s|\A|\Z))", lines_str)]
+    symbol_idx_list = [m.start() for m in re.finditer(r"(?!(\d|\.|\s|\A|\Z))", lines_str)]
 
     # part 1
     sum_part_num = 0
@@ -76,7 +78,7 @@ with open("../AoC-input/2023/day3.txt", "r") as f:
         d_end = d_end - 1  # so that the two ends are inclusive
         if is_part_number(d_start, d_end, symbol_idx_list, line_width):
             sum_part_num += int(d_match.group())
-    
+        
     # part 2
     sum_gear_ratio = 0
     for s_idx in symbol_idx_list:
@@ -85,3 +87,6 @@ with open("../AoC-input/2023/day3.txt", "r") as f:
     
     print("Sum of the parts numbers:", sum_part_num)
     print("sum of all of the gear ratios", sum_gear_ratio)
+
+if __name__ == "__main__":
+    main()

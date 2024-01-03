@@ -4,9 +4,8 @@ from typing import List
 class Grid:
     def __init__(self, content: List[List]=None, sep: str=""):
         self.content = deepcopy(content) if content else []
-        w = self.shape[1]
         for row in self.content:
-            assert len(row) == w
+            assert len(row) == self.shape[1]
         self.sep = sep
     def append_row(self, row: list):
         if self.content:
