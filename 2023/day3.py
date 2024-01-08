@@ -65,7 +65,7 @@ def main():
     parser = Parser("../AoC-input/2023/day3.txt")
     lines = parser.get_lines()
     line_width = len(lines[0])
-    lines_str = "".join(lines)  # ! if I use parser.data here, I got different results ! 
+    lines_str = "".join(lines)
     # extract indices of all digits
     digit_iter = re.finditer(r"\d+", lines_str)
     # extract indices of all symbols (non-digit and non-period)
@@ -78,13 +78,13 @@ def main():
         d_end = d_end - 1  # so that the two ends are inclusive
         if is_part_number(d_start, d_end, symbol_idx_list, line_width):
             sum_part_num += int(d_match.group())
-        
+
     # part 2
     sum_gear_ratio = 0
     for s_idx in symbol_idx_list:
         if lines_str[s_idx] == "*":  # could be a gear
             sum_gear_ratio += find_gear_ratio(s_idx, lines_str, line_width)  # zero if not a gear
-    
+
     print("Sum of the parts numbers:", sum_part_num)
     print("sum of all of the gear ratios", sum_gear_ratio)
 

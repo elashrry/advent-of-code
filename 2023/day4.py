@@ -1,4 +1,9 @@
-def parse_input(line: str):
+from collections import defaultdict
+
+from utils import Parser
+
+
+def parse_line(line: str):
     """Parses a line of input containing card information and returns relevant data.
 
     Args:
@@ -6,7 +11,7 @@ def parse_input(line: str):
         "Card <card_id>: <winning_set> | <elf_set>".
 
     Returns:
-        Tuple[int, Set[int], Set[int]]: A tuple containing the card ID, winning set, 
+        Tuple[int, Set[int], Set[int]]: A tuple containing the card ID, winning set,
             and elf set parsed from the input.
 
     Example:
@@ -22,12 +27,15 @@ def parse_input(line: str):
 
     return card_id, winning_set, elf_set
 
-with open("../AoC-input/2023/day4.txt", "r") as f:
+
+def main():
+    parser = Parser("../AoC-input/2023/day4.txt")
+    line_list = parser.get_lines()
     # part 1 & 2
     total_points = 0
-    new_pile_dict = {1: 1}  # count of each card
-    for line in f:
-        card_id, winning_set, elf_set = parse_input(line)
+    new_pile_dict = defaultdict(lambda: 1)  # count of each card
+    for line in line_list:
+        card_id, winning_set, elf_set = parse_line(line)
 
         # part 1
         n_winning_cards = len(winning_set.intersection(elf_set))
@@ -39,9 +47,10 @@ with open("../AoC-input/2023/day4.txt", "r") as f:
         # we win a card for each copy of the input card
         # add old copies too of the cards we win
         new_card_copies = {
-            i: new_pile_dict.get(i, 1) + new_pile_dict.get(card_id, 1)
+            i: new_pile_dict[i] + new_pile_dict[card_id]
             for i in new_card_list
             }
+        # add the winning card as well if it doesn't exist
         if card_id not in new_pile_dict:
             new_pile_dict[card_id] = 1
         # update dict
@@ -51,7 +60,7 @@ with open("../AoC-input/2023/day4.txt", "r") as f:
     total_n_cards = sum(v for v in new_pile_dict.values())
     print("Part 1: Total points:", total_points)
     print("Part 2: Total number of cards:", total_n_cards)
-        
 
 
-
+if __name__ == "__main__":
+    main()
