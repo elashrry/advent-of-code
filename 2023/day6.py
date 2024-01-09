@@ -1,4 +1,4 @@
-from math import ceil
+from math import floor, ceil
 
 from aocutils import Parser
 from aocutils import solve_quadratic_eqn
@@ -16,14 +16,17 @@ def parse_input(file_name):
 
 def main():
     time_list, record_list = parse_input("../AoC-input/2023/day6.txt")
-    # part 1: write distance formula --> quadratic equation to be solved
+    # part 1: write distance formula --> quadratic equation to be solved, see day6.md
     answer = 1
     for total_time, record in zip(time_list, record_list):
         # assumption: real solutions always exist here
         sol1, sol2 = solve_quadratic_eqn(1, -total_time, record)
-        # if sol1 is 1.5 or 2, we want to start from 2
+        if sol1 == sol2:  # no ways to win
+            continue
+        # if sol1 is 1.5, we want to start from 2
+        # if sol1 is 2, we want to start from 3
         # if sol2 is 5.5 or 6, we want to finish at 5
-        lower = ceil(max(0, sol1))
+        lower = floor(max(0, sol1) + 1)
         upper = ceil(min(total_time, sol2))  # won't be included
         total_ways_to_win = len([t for t in range(lower, upper)])
         answer *= total_ways_to_win
@@ -33,6 +36,7 @@ def main():
     total_time_part_2 = int("".join([str(t) for t in time_list]))
     record_part_2 = int("".join([str(t) for t in record_list]))
     sol1, sol2 = solve_quadratic_eqn(1, -total_time_part_2, record_part_2)
+    assert sol1 != sol2
     lower = ceil(max(0, sol1))
     upper = ceil(min(total_time_part_2, sol2))  # won't be included
     total_ways_to_win_part2 = len([t for t in range(lower, upper)])
