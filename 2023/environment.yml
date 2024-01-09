@@ -1,0 +1,13 @@
+name: AoC2023
+channels:
+- conda-forge
+- defaults
+dependencies:
+- networkx=3.2.1
+- numpy=1.26.3  # ? used?
+- pygraphviz=1.9
+- python=3.9.18
+- pip
+- pip:
+  - z3==0.2.0
+  - -e ../aocutils

@@ -1,13 +1,15 @@
 from typing import List
 import re
 
-from utils import Parser
+from aocutils import Parser
+
 
 # part 1
 def is_part_number(
-        d_start: int, d_end: int, symbol_idx_list: List[int], line_width: int):
+    d_start: int, d_end: int, symbol_idx_list: List[int], line_width: int
+):
     """Checks if the digit is adjacent to a symbol (even diagonally).
-    
+
     Args:
         d_start (int): start index of the digit.
         d_end (int): start index of the digit (inclusive).
@@ -20,17 +22,18 @@ def is_part_number(
     for s_index in symbol_idx_list:
         distance_start = s_index - d_start
         distance_end = s_index - d_end
-        if distance_start < -1-line_width:
+        if distance_start < -1 - line_width:
             continue
         elif distance_end > line_width + 1:
             return False
 
         distance_start = (s_index - d_start) % line_width
         distance_end = (s_index - d_end) % line_width
-        adjacent_index_list = [0, 1, line_width-1]
+        adjacent_index_list = [0, 1, line_width - 1]
         if distance_start in adjacent_index_list or distance_end in adjacent_index_list:
             return True
     return False
+
 
 # part 2
 def find_gear_ratio(s_idx: int, lines_str: str, line_width: int):
@@ -44,22 +47,24 @@ def find_gear_ratio(s_idx: int, lines_str: str, line_width: int):
         line_width (int): line's width.
 
     Returns:
-        (int): gear ratio if s_idx is for a gear, otherwise 0.    
+        (int): gear ratio if s_idx is for a gear, otherwise 0.
     """
     # cut closest 4 lines and update s_idx
     first = max(0, s_idx - line_width - s_idx % line_width)
     end = s_idx + line_width + line_width - s_idx % line_width
-    lines_str = lines_str[first: end]
+    lines_str = lines_str[first:end]
     s_idx = s_idx - first
     # get digits that are adjacent to the gear
     digit_iter = re.finditer(r"\d+", lines_str)
     adjacent_parts = [
-        int(m.group()) for m in digit_iter 
-        if is_part_number(m.span()[0], m.span()[1]-1, [s_idx], line_width)
-        ]
+        int(m.group())
+        for m in digit_iter
+        if is_part_number(m.span()[0], m.span()[1] - 1, [s_idx], line_width)
+    ]
     if len(adjacent_parts) == 2:
         return adjacent_parts[0] * adjacent_parts[1]
     return 0
+
 
 def main():
     parser = Parser("../AoC-input/2023/day3.txt")
@@ -69,7 +74,9 @@ def main():
     # extract indices of all digits
     digit_iter = re.finditer(r"\d+", lines_str)
     # extract indices of all symbols (non-digit and non-period)
-    symbol_idx_list = [m.start() for m in re.finditer(r"(?!(\d|\.|\s|\A|\Z))", lines_str)]
+    symbol_idx_list = [
+        m.start() for m in re.finditer(r"(?!(\d|\.|\s|\A|\Z))", lines_str)
+    ]
 
     # part 1
     sum_part_num = 0
@@ -83,10 +90,13 @@ def main():
     sum_gear_ratio = 0
     for s_idx in symbol_idx_list:
         if lines_str[s_idx] == "*":  # could be a gear
-            sum_gear_ratio += find_gear_ratio(s_idx, lines_str, line_width)  # zero if not a gear
+            sum_gear_ratio += find_gear_ratio(
+                s_idx, lines_str, line_width
+            )  # zero if not a gear
 
     print("Sum of the parts numbers:", sum_part_num)
     print("sum of all of the gear ratios", sum_gear_ratio)
+
 
 if __name__ == "__main__":
     main()

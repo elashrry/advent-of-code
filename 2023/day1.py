@@ -1,6 +1,7 @@
 import re
 
-from utils import Parser, timeit
+from aocutils import Parser, timeit
+
 
 @timeit
 def solve_part1(parser):
@@ -11,6 +12,7 @@ def solve_part1(parser):
         cal_value = 10*int(line_digits[0]) + int(line_digits[-1])
         total += cal_value
     return total
+
 
 @timeit
 def solve_part2(parser):
@@ -28,6 +30,7 @@ def solve_part2(parser):
         total += cal_value
     return total
 
+
 def main():
     parser = Parser("../AoC-input/2023/day1.txt")
     # part 1
@@ -38,5 +41,6 @@ def main():
     total = solve_part2(parser)
     print("the _corrected_ sum of all of the calibration values:", total)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()

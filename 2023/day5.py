@@ -1,4 +1,4 @@
-from utils import Parser, IntInterval, Subset, Mapper, timeit
+from aocutils import Parser, IntInterval, Subset, Mapper, timeit
 
 
 @timeit

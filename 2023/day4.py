@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from utils import Parser
+from aocutils import Parser
 
 
 def parse_line(line: str):
@@ -40,16 +40,15 @@ def main():
         # part 1
         n_winning_cards = len(winning_set.intersection(elf_set))
         if n_winning_cards > 0:
-            total_points += 2**(n_winning_cards-1)
+            total_points += 2 ** (n_winning_cards - 1)
 
         # part 2
-        new_card_list = [i for i in range(card_id+1, card_id+n_winning_cards+1)]
+        new_card_list = [i for i in range(card_id + 1, card_id + n_winning_cards + 1)]
         # we win a card for each copy of the input card
         # add old copies too of the cards we win
         new_card_copies = {
-            i: new_pile_dict[i] + new_pile_dict[card_id]
-            for i in new_card_list
-            }
+            i: new_pile_dict[i] + new_pile_dict[card_id] for i in new_card_list
+        }
         # add the winning card as well if it doesn't exist
         if card_id not in new_pile_dict:
             new_pile_dict[card_id] = 1
