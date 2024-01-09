@@ -1,6 +1,6 @@
 import pytest
 
-from utils import IntInterval, Subset
+from aocutils import IntInterval, Subset
 
 
 @pytest.fixture

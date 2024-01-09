@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import mock_open, patch
 import re
 
-from ...aocutils import Parser  # TODO: not use relative import
+from aocutils import Parser  # TODO: not use relative import
 
 
 @pytest.fixture

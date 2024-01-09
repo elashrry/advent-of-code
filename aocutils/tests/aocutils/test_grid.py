@@ -1,5 +1,5 @@
 import pytest
-from ...aocutils import Grid
+from aocutils import Grid
 
 
 @pytest.fixture

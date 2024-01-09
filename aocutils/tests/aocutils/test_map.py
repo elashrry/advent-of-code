@@ -1,4 +1,4 @@
-from utils import IntInterval, Subset, Mapper
+from aocutils import IntInterval, Subset, Mapper
 
 
 def test_map():

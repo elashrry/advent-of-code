@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import List, Callable, Match
 import re
 
-from utils.comm import Grid
+from .grid import Grid
 
 
 class Parser:
