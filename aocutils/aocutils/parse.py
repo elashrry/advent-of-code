@@ -75,9 +75,7 @@ class Parser:
         Returns:
         - List[str]: A list of strings representing individual lines.
         """
-        lines = self.data.split("\n")
-        # lines = lines[:-1] if not lines[-1].strip() else lines
-        return lines
+        return self.data.split("\n")
 
     def get_sections(self) -> List[str]:
         """Returns a list containing sections separated by double newline characters.
