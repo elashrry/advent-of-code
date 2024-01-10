@@ -106,6 +106,22 @@ class Parser:
                 grid.append_row(line_as_list)
         return grid
 
+    def get_integers(self, sep: str | None = None) -> List[List[int]]:
+        """Extracts numeric values from the lines.
+
+        Args:
+            separator (str): Separator used to split values within each line.
+            Defaults to ",".
+
+        Returns:
+            list: A list of lists containing numeric values extracted from the lines.
+        """
+        line_list = self.get_lines()
+        if sep is None:
+            return [list(map(int, [ch for ch in line.strip()])) for line in line_list]
+        sep = r"\s*"+sep+r"\s*"
+        return [list(map(int, re.split(sep, line.strip()))) for line in line_list]
+
     def apply_regex(
         self, pattern: str, return_loc=False
     ) -> List[str] | List[Match[str]]:

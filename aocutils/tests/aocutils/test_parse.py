@@ -72,6 +72,28 @@ def test_get_grid(sample_text):
     ]
 
 
+def test_get_integers():
+    # case 1 without separator
+    sample_text = "123\n456"
+    integers = Parser(text=sample_text).get_integers()
+    assert isinstance(integers, list)
+    assert isinstance(integers[0], list)
+    assert integers == [[1, 2, 3], [4, 5, 6]]
+    # case 2 with separator
+    sample_text = "1, 2, 3\n4, 5, 6"
+    integers = Parser(text=sample_text).get_integers(", ")
+    assert isinstance(integers, list)
+    assert isinstance(integers[0], list)
+    assert integers == [[1, 2, 3], [4, 5, 6]]
+
+    # case 3 with separator and not adding space to the sep argument
+    sample_text = "1, 2, 3\n4, 5, 6"
+    integers = Parser(text=sample_text).get_integers(",")
+    assert isinstance(integers, list)
+    assert isinstance(integers[0], list)
+    assert integers == [[1, 2, 3], [4, 5, 6]]
+
+
 def test_apply_regex(sample_text):
     parser = Parser(text=sample_text)
     pattern = r"Line (\d+)"
